@@ -2,8 +2,6 @@ import { fileURLToPath, URL } from 'node:url'
 
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
-import vueJsx from '@vitejs/plugin-vue-jsx'
-import vueDevTools from 'vite-plugin-vue-devtools'
 
 // https://vite.dev/config/
 export default defineConfig({
@@ -29,23 +27,5 @@ export default defineConfig({
         rewrite: (path) => path.replace(/^\/plagwise/, '')
       }
     }
-  },
-  build: {
-    outDir: 'dist',
-    assetsDir: 'assets',
-    sourcemap: false,
-    rollupOptions: {
-      output: {
-        manualChunks: {
-          vendor: ['vue', 'vue-router'],
-          elementPlus: ['element-plus'],
-          axios: ['axios']
-        }
-      }
-    },
-    chunkSizeWarningLimit: 1000
-  },
-  define: {
-    __VUE_PROD_DEVTOOLS__: false
   }
 })
