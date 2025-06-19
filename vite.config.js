@@ -29,5 +29,23 @@ export default defineConfig({
         rewrite: (path) => path.replace(/^\/plagwise/, '')
       }
     }
+  },
+  build: {
+    outDir: 'dist',
+    assetsDir: 'assets',
+    sourcemap: false,
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          vendor: ['vue', 'vue-router'],
+          elementPlus: ['element-plus'],
+          axios: ['axios']
+        }
+      }
+    },
+    chunkSizeWarningLimit: 1000
+  },
+  define: {
+    __VUE_PROD_DEVTOOLS__: false
   }
 })
