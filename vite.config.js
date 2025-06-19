@@ -16,7 +16,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: 'http://localhost:3000',
+        target: 'https://article-backend-ten.vercel.app/',
         changeOrigin: true
       },
       '^/plagwise/.*': {
