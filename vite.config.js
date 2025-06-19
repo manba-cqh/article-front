@@ -16,7 +16,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: 'https://article-backend-ten.vercel.app/',
+        target: 'https://article-backend-6o7aa24lb-cqhs-projects-63c79c7e.vercel.app',
         changeOrigin: true
       },
       '^/plagwise/.*': {
