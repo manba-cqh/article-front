@@ -7,7 +7,7 @@ const config = {
   },
   // 生产环境
   production: {
-    API_BASE_URL: '/api', // 使用相对路径，通过Vercel代理
+    API_BASE_URL: 'https://article-backend-6o7aa24lb-cqhs-projects-63c79c7e.vercel.app/api',
     PLAGWISE_API_URL: 'https://api.plagwise.com/api'
   }
 }

@@ -56,13 +56,12 @@ export const authService = {
   // 用户登录
   async login(username, password) {
     try {
-      const formData = new FormData()
-      formData.append('username', username)
-      formData.append('password', password)
-      
-      const response = await api.post('/token', formData, {
+      const response = await api.post('/token', {
+        username: username,
+        password: password
+      }, {
         headers: {
-          'Content-Type': 'application/x-www-form-urlencoded'
+          'Content-Type': 'application/json'
         }
       })
       
