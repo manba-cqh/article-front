@@ -3,12 +3,12 @@ const config = {
   // 开发环境
   development: {
     API_BASE_URL: 'http://localhost:3000/api',
-    PLAGWISE_API_URL: 'https://api.plagwise.com/api'
+    PLAGWISE_API_URL: 'https://plagwise.com/api'
   },
   // 生产环境
   production: {
-    API_BASE_URL: 'https://article-backend-6o7aa24lb-cqhs-projects-63c79c7e.vercel.app/api',
-    PLAGWISE_API_URL: 'https://api.plagwise.com/api'
+    API_BASE_URL: 'https://article-backend-eight.vercel.app/api',
+    PLAGWISE_API_URL: 'https://plagwise.com/api'
   }
 }
 

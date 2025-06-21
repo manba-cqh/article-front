@@ -42,6 +42,7 @@ import { ref, reactive } from 'vue'
 import { useRouter } from 'vue-router'
 import { authService } from '../services/auth'
 import eventBus from '../utils/eventBus'
+import { debugUtils } from '../utils/debug'
 
 const router = useRouter()
 const loading = ref(false)
@@ -55,9 +56,24 @@ const formData = reactive({
 const handleSubmit = async () => {
   try {
     error.value = ''
+    
+    // 添加表单验证
+    if (!formData.username || !formData.username.trim()) {
+      error.value = '请输入用户名'
+      return
+    }
+    
+    if (!formData.password || !formData.password.trim()) {
+      error.value = '请输入密码'
+      return
+    }
+    
+    // 调试信息
+    debugUtils.validateFormData(formData)
+    
     loading.value = true
     
-    const response = await authService.login(formData.username, formData.password)
+    const response = await authService.login(formData.username.trim(), formData.password)
     eventBus.emit('login-success')
     
     // 获取用户信息
@@ -70,6 +86,7 @@ const handleSubmit = async () => {
       router.push('/')
     }
   } catch (err) {
+    console.error('登录失败:', err)
     error.value = err.message || '登录失败'
   } finally {
     loading.value = false

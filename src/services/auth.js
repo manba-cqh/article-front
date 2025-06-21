@@ -19,9 +19,19 @@ api.interceptors.request.use(
     if (token) {
       config.headers.Authorization = `Bearer ${token}`
     }
+    
+    // 调试信息
+    console.log('🚀 发送请求:', {
+      method: config.method?.toUpperCase(),
+      url: config.url,
+      data: config.data,
+      headers: config.headers
+    })
+    
     return config
   },
   error => {
+    console.error('❌ 请求拦截器错误:', error)
     return Promise.reject(error)
   }
 )
@@ -56,10 +66,24 @@ export const authService = {
   // 用户登录
   async login(username, password) {
     try {
-      const response = await api.post('/token', {
-        username: username,
+      // 参数验证
+      if (!username || !username.trim()) {
+        throw new Error('用户名不能为空')
+      }
+      if (!password || !password.trim()) {
+        throw new Error('密码不能为空')
+      }
+      
+      const requestData = {
+        username: username.trim(),
         password: password
-      }, {
+      }
+      
+      console.log('发送登录请求:', { username: requestData.username, password: '***' })
+      
+      // 尝试 JSON 格式
+      try {
+        const response = await api.post('/token', requestData, {
         headers: {
           'Content-Type': 'application/json'
         }
@@ -71,10 +95,52 @@ export const authService = {
       }
       
       return response.data
+      } catch (jsonError) {
+        // 如果 JSON 格式失败，尝试 form-urlencoded 格式
+        if (jsonError.response?.status === 422) {
+          console.log('JSON 格式失败，尝试 form-urlencoded 格式')
+          
+          const formData = new URLSearchParams()
+          formData.append('username', requestData.username)
+          formData.append('password', requestData.password)
+          
+          const response = await api.post('/token', formData, {
+            headers: {
+              'Content-Type': 'application/x-www-form-urlencoded'
+            }
+          })
+          
+          // 保存 token 到 localStorage
+          if (response.data.access_token) {
+            localStorage.setItem('token', response.data.access_token)
+          }
+          
+          return response.data
+        } else {
+          throw jsonError
+        }
+      }
     } catch (error) {
+      console.error('登录错误:', error.response?.data || error.message)
+      
       if (error.response?.data?.detail) {
+        // 处理 Pydantic 验证错误
+        if (Array.isArray(error.response.data.detail)) {
+          const errorMessages = error.response.data.detail.map(err => err.msg).join(', ')
+          throw new Error(errorMessages)
+        } else {
         throw new Error(error.response.data.detail)
       }
+      }
+      
+      if (error.response?.status === 422) {
+        throw new Error('请求数据格式错误，请检查输入')
+      }
+      
+      if (error.response?.status === 401) {
+        throw new Error('用户名或密码错误')
+      }
+      
       throw new Error('登录失败，请检查用户名和密码')
     }
   },
