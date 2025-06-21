@@ -18,7 +18,7 @@ export const plagwiseService = {
     formData.append('exclude_quotes', '0')
     
     try {
-      const response = await axios.post(`${config.PLAGWISE_API_URL}/submit-file`, formData, {
+      const response = await axios.post(`${BASE_URL}/submit-file`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
