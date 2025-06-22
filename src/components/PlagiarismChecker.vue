@@ -4,6 +4,34 @@
       <!-- 左侧：上传和查重操作区 -->
       <div class="left-panel">
         <h2>文档查重</h2>
+        
+        <!-- 文件提交要求提示 -->
+        <div class="submission-requirements">
+          <h3>📋 提交要求</h3>
+          <div class="requirements-list">
+            <div class="requirement-item">
+              <span class="requirement-icon">📦</span>
+              <span>文件大小必须小于 100 MB</span>
+            </div>
+            <div class="requirement-item">
+              <span class="requirement-icon">📄</span>
+              <span>文件至少包含 300 个段落格式的单词</span>
+            </div>
+            <div class="requirement-item">
+              <span class="requirement-icon">📏</span>
+              <span>字数不得超过 30,000</span>
+            </div>
+            <div class="requirement-item">
+              <span class="requirement-icon">🌏</span>
+              <span>内容必须使用英语或西班牙语</span>
+            </div>
+          </div>
+          <div class="privacy-notice">
+            <span class="notice-icon">🔒</span>
+            <span>注意：文件不会被抄袭或保存在数据库中</span>
+          </div>
+        </div>
+        
         <el-form :model="form" label-width="120px">
           <el-form-item label="上传文件">
             <el-upload
@@ -25,6 +53,18 @@
                 </div>
               </template>
             </el-upload>
+            
+            <!-- 文件信息显示 -->
+            <div v-if="selectedFile" class="file-info">
+              <div class="file-info-header">
+                <span class="file-icon">📄</span>
+                <span class="file-name">{{ selectedFile.name }}</span>
+              </div>
+              <div class="file-details">
+                <span class="file-size">大小: {{ formatFileSize(selectedFile.size) }}</span>
+                <span class="file-type">类型: {{ getFileType(selectedFile.name) }}</span>
+              </div>
+            </div>
           </el-form-item>
 
           <el-form-item>
@@ -182,7 +222,72 @@ const handleCheckWithSerial = async (serial) => {
 }
 
 const handleFileChange = (file) => {
-  selectedFile.value = file.raw
+  const fileToValidate = file.raw
+  
+  // 文件验证
+  const validationResult = validateFile(fileToValidate)
+  
+  if (validationResult.isValid) {
+    selectedFile.value = fileToValidate
+    ElMessage.success('文件验证通过')
+  } else {
+    ElMessage.error(validationResult.error)
+    // 清除文件选择
+    selectedFile.value = null
+  }
+}
+
+// 文件验证函数
+const validateFile = (file) => {
+  // 检查文件大小 (100MB = 100 * 1024 * 1024 bytes)
+  const maxSize = 100 * 1024 * 1024
+  if (file.size > maxSize) {
+    return {
+      isValid: false,
+      error: '文件大小超过 100 MB 限制'
+    }
+  }
+  
+  // 检查文件类型
+  const allowedTypes = [
+    'application/msword',
+    'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+    'application/pdf',
+    'text/plain'
+  ]
+  
+  if (!allowedTypes.includes(file.type)) {
+    return {
+      isValid: false,
+      error: '不支持的文件格式，请选择 .doc, .docx, .pdf, .txt 格式的文件'
+    }
+  }
+  
+  return {
+    isValid: true,
+    error: null
+  }
+}
+
+// 格式化文件大小
+const formatFileSize = (bytes) => {
+  if (bytes === 0) return '0 Bytes'
+  const k = 1024
+  const sizes = ['Bytes', 'KB', 'MB', 'GB']
+  const i = Math.floor(Math.log(bytes) / Math.log(k))
+  return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i]
+}
+
+// 获取文件类型
+const getFileType = (fileName) => {
+  const extension = fileName.split('.').pop().toLowerCase()
+  const typeMap = {
+    'doc': 'Microsoft Word',
+    'docx': 'Microsoft Word',
+    'pdf': 'PDF',
+    'txt': 'Text'
+  }
+  return typeMap[extension] || 'Unknown'
 }
 
 const fetchReports = async () => {
@@ -252,6 +357,107 @@ onUnmounted(() => {
 .left-panel h2, .right-panel h2 {
   margin-bottom: 24px;
 }
+
+/* 提交要求样式 */
+.submission-requirements {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  border: 1px solid #dee2e6;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 24px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.submission-requirements h3 {
+  margin: 0 0 16px 0;
+  color: #495057;
+  font-size: 16px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.requirements-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.requirement-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 0;
+  color: #495057;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.requirement-icon {
+  font-size: 18px;
+  min-width: 24px;
+  text-align: center;
+}
+
+.privacy-notice {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px;
+  background: rgba(40, 167, 69, 0.1);
+  border: 1px solid rgba(40, 167, 69, 0.2);
+  border-radius: 8px;
+  color: #155724;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.notice-icon {
+  font-size: 16px;
+}
+
+/* 文件信息显示样式 */
+.file-info {
+  margin-top: 16px;
+  padding: 16px;
+  background: #f8f9fa;
+  border: 1px solid #e9ecef;
+  border-radius: 8px;
+  border-left: 4px solid #007bff;
+}
+
+.file-info-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.file-icon {
+  font-size: 20px;
+}
+
+.file-name {
+  font-weight: 600;
+  color: #495057;
+  font-size: 14px;
+}
+
+.file-details {
+  display: flex;
+  gap: 16px;
+  font-size: 12px;
+  color: #6c757d;
+}
+
+.file-size, .file-type {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
 .result-content {
   margin-top: 16px;
 }

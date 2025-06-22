@@ -32,8 +32,14 @@ export const debugUtils = {
   validateFormData(formData) {
     const issues = []
     
-    if (!formData.username || !formData.username.trim()) {
-      issues.push('用户名为空')
+    if (!formData.email || !formData.email.trim()) {
+      issues.push('邮箱为空')
+    } else {
+      // 验证邮箱格式
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+      if (!emailRegex.test(formData.email.trim())) {
+        issues.push('邮箱格式不正确')
+      }
     }
     
     if (!formData.password || !formData.password.trim()) {

@@ -3,13 +3,13 @@
     <h2>用户登录</h2>
     <form @submit.prevent="handleSubmit" class="login-form">
       <div class="form-group">
-        <label for="username">用户名</label>
+        <label for="email">邮箱</label>
         <input
-          type="text"
-          id="username"
-          v-model="formData.username"
+          type="email"
+          id="email"
+          v-model="formData.email"
           required
-          placeholder="请输入用户名"
+          placeholder="请输入邮箱"
         />
       </div>
       
@@ -49,7 +49,7 @@ const loading = ref(false)
 const error = ref('')
 
 const formData = reactive({
-  username: '',
+  email: '',
   password: ''
 })
 
@@ -58,8 +58,15 @@ const handleSubmit = async () => {
     error.value = ''
     
     // 添加表单验证
-    if (!formData.username || !formData.username.trim()) {
-      error.value = '请输入用户名'
+    if (!formData.email || !formData.email.trim()) {
+      error.value = '请输入邮箱'
+      return
+    }
+    
+    // 验证邮箱格式
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    if (!emailRegex.test(formData.email.trim())) {
+      error.value = '请输入正确的邮箱格式'
       return
     }
     
@@ -73,7 +80,7 @@ const handleSubmit = async () => {
     
     loading.value = true
     
-    const response = await authService.login(formData.username.trim(), formData.password)
+    const response = await authService.login(formData.email.trim(), formData.password)
     eventBus.emit('login-success')
     
     // 获取用户信息

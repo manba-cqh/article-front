@@ -12,10 +12,6 @@
         label-width="80px"
         @submit.prevent="handleSubmit"
       >
-        <el-form-item label="用户名" prop="username">
-          <el-input v-model="form.username" placeholder="请输入用户名" />
-        </el-form-item>
-        
         <el-form-item label="邮箱" prop="email">
           <el-input v-model="form.email" placeholder="请输入邮箱" />
         </el-form-item>
@@ -63,17 +59,12 @@ const formRef = ref(null)
 const loading = ref(false)
 
 const form = reactive({
-  username: '',
   password: '',
   confirmPassword: '',
   email: ''
 })
 
 const rules = {
-  username: [
-    { required: true, message: '请输入用户名', trigger: 'blur' },
-    { min: 3, max: 20, message: '用户名长度应在3-20个字符之间', trigger: 'blur' }
-  ],
   password: [
     { required: true, message: '请输入密码', trigger: 'blur' },
     { min: 6, message: '密码长度不能少于6个字符', trigger: 'blur' }
@@ -105,9 +96,8 @@ const handleSubmit = async () => {
       try {
         loading.value = true
         await authService.register({
-          username: form.username,
-          password: form.password,
-          email: form.email
+          email: form.email,
+          password: form.password
         })
         ElMessage.success('注册成功，请登录')
         router.push('/login')

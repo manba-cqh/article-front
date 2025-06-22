@@ -54,7 +54,7 @@ onUnmounted(() => {
       </div>
       <div class="nav-links">
         <template v-if="currentUser">
-          <span class="welcome-text">欢迎, {{ currentUser.username }}</span>
+          <span class="welcome-text">欢迎, {{ currentUser.email || currentUser.username }}</span>
           <button @click="handleLogout" class="logout-btn">退出登录</button>
         </template>
       </div>

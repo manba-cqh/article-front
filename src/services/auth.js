@@ -64,22 +64,28 @@ export const authService = {
   },
 
   // 用户登录
-  async login(username, password) {
+  async login(email, password) {
     try {
       // 参数验证
-      if (!username || !username.trim()) {
-        throw new Error('用户名不能为空')
+      if (!email || !email.trim()) {
+        throw new Error('邮箱不能为空')
       }
       if (!password || !password.trim()) {
         throw new Error('密码不能为空')
       }
       
+      // 验证邮箱格式
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+      if (!emailRegex.test(email.trim())) {
+        throw new Error('请输入正确的邮箱格式')
+      }
+      
       const requestData = {
-        username: username.trim(),
+        username: email.trim(), // 后端可能仍期望 username 字段
         password: password
       }
       
-      console.log('发送登录请求:', { username: requestData.username, password: '***' })
+      console.log('发送登录请求:', { email: requestData.username, password: '***' })
       
       // 尝试 JSON 格式
       try {
@@ -138,10 +144,10 @@ export const authService = {
       }
       
       if (error.response?.status === 401) {
-        throw new Error('用户名或密码错误')
+        throw new Error('邮箱或密码错误')
       }
       
-      throw new Error('登录失败，请检查用户名和密码')
+      throw new Error('登录失败，请检查邮箱和密码')
     }
   },
 
