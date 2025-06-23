@@ -7,7 +7,7 @@ const config = {
   },
   // 生产环境
   production: {
-    API_BASE_URL: 'https://article-backend-eight.vercel.app/api',
+    API_BASE_URL: 'https://cc.turnitin-offical.com/api',
     PLAGWISE_API_URL: 'https://plagwise.com/api'
   }
 }

@@ -16,7 +16,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: 'https://article-backend-eight.vercel.app',
+        target: 'https://cc.turnitin-offical.com',
         changeOrigin: true
       },
       '^/plagwise/.*': {
