@@ -103,7 +103,7 @@ const handleSubmit = async () => {
 
 <style scoped>
 .login-container {
-  max-width: 400px;
+  max-width: 500px;
   margin: 40px auto;
   padding: 20px;
   border-radius: 8px;
@@ -185,5 +185,143 @@ button:disabled {
 
 .register-link a:hover {
   text-decoration: underline;
+}
+
+/* 响应式设计 */
+@media (min-width: 1200px) {
+  .login-container {
+    max-width: 600px;
+    margin: 60px auto;
+    padding: 40px;
+  }
+  
+  h2 {
+    font-size: 2rem;
+    margin-bottom: 30px;
+  }
+  
+  .login-form {
+    gap: 20px;
+  }
+  
+  input {
+    padding: 12px 16px;
+    font-size: 16px;
+  }
+  
+  button {
+    padding: 14px;
+    font-size: 18px;
+  }
+}
+
+@media (min-width: 1600px) {
+  .login-container {
+    max-width: 700px;
+    margin: 80px auto;
+    padding: 50px;
+  }
+  
+  h2 {
+    font-size: 2.25rem;
+    margin-bottom: 35px;
+  }
+  
+  .login-form {
+    gap: 25px;
+  }
+  
+  input {
+    padding: 14px 18px;
+    font-size: 16px;
+  }
+  
+  button {
+    padding: 16px;
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 1024px) and (min-width: 769px) {
+  .login-container {
+    max-width: 450px;
+    margin: 50px auto;
+    padding: 30px;
+  }
+  
+  h2 {
+    font-size: 1.75rem;
+    margin-bottom: 25px;
+  }
+  
+  .login-form {
+    gap: 18px;
+  }
+  
+  input {
+    padding: 10px 14px;
+    font-size: 16px;
+  }
+  
+  button {
+    padding: 12px;
+    font-size: 17px;
+  }
+}
+
+@media (max-width: 768px) {
+  .login-container {
+    max-width: 90%;
+    margin: 20px auto;
+    padding: 15px;
+  }
+  
+  h2 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+  }
+  
+  .login-form {
+    gap: 12px;
+  }
+  
+  input {
+    padding: 10px 12px;
+    font-size: 16px; /* 防止iOS缩放 */
+  }
+  
+  button {
+    padding: 12px;
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .login-container {
+    max-width: 95%;
+    margin: 10px auto;
+    padding: 12px;
+  }
+  
+  h2 {
+    font-size: 1.3rem;
+    margin-bottom: 12px;
+  }
+  
+  .login-form {
+    gap: 10px;
+  }
+  
+  input {
+    padding: 8px 10px;
+  }
+  
+  button {
+    padding: 10px;
+  }
+  
+  .register-link {
+    font-size: 13px;
+  }
 }
 </style> 

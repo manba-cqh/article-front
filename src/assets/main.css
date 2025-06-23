@@ -1,5 +1,116 @@
 @import './base.css';
 
+/* 全局响应式设计 */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  line-height: 1.6;
+  color: #333;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* 移动端优化 */
+@media (max-width: 768px) {
+  html {
+    font-size: 14px;
+  }
+  
+  /* 防止iOS缩放 */
+  input[type="text"],
+  input[type="email"],
+  input[type="password"],
+  input[type="number"],
+  textarea,
+  select {
+    font-size: 16px !important;
+  }
+  
+  /* 触摸优化 */
+  button,
+  .el-button,
+  .el-input,
+  .el-select {
+    min-height: 44px;
+  }
+  
+  /* 表格滚动 */
+  .el-table {
+    overflow-x: auto;
+  }
+  
+  /* 弹窗优化 */
+  .el-dialog {
+    margin: 10vh auto !important;
+    max-width: 90vw !important;
+  }
+  
+  .el-dialog__body {
+    padding: 16px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  html {
+    font-size: 13px;
+  }
+  
+  /* 更小的触摸目标 */
+  button,
+  .el-button {
+    min-height: 40px;
+  }
+  
+  /* 弹窗进一步优化 */
+  .el-dialog {
+    margin: 5vh auto !important;
+    max-width: 95vw !important;
+  }
+  
+  .el-dialog__body {
+    padding: 12px !important;
+  }
+}
+
+/* 暗色模式支持 */
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: #1a1a1a;
+    color: #ffffff;
+  }
+}
+
+/* 高对比度模式支持 */
+@media (prefers-contrast: high) {
+  button,
+  .el-button {
+    border-width: 2px;
+  }
+  
+  input,
+  .el-input__inner {
+    border-width: 2px;
+  }
+}
+
+/* 减少动画模式支持 */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
 #app {
   max-width: 1280px;
   margin: 0 auto;

@@ -341,8 +341,9 @@ onUnmounted(() => {
   height: 100%;
   width: 100%;
   gap: 32px;
-  padding: 32px 0 32px 0;
+  padding: 32px 2rem 32px 2rem;
   box-sizing: border-box;
+  max-width: 100%;
 }
 .left-panel, .right-panel {
   flex: 1;
@@ -466,5 +467,180 @@ onUnmounted(() => {
 }
 .right-panel {
   flex: 3;
+}
+
+/* 响应式设计 */
+@media (min-width: 1200px) {
+  .content-wrapper {
+    gap: 40px;
+    padding: 40px 6rem;
+  }
+  
+  .left-panel, .right-panel {
+    padding: 40px;
+  }
+  
+  .right-panel {
+    flex: 4;
+  }
+  
+  .left-panel {
+    flex: 1;
+    min-width: 400px;
+  }
+}
+
+@media (min-width: 1600px) {
+  .content-wrapper {
+    gap: 48px;
+    padding: 40px 6rem;
+  }
+  
+  .left-panel, .right-panel {
+    padding: 48px;
+  }
+  
+  .right-panel {
+    flex: 5;
+  }
+  
+  .left-panel {
+    flex: 1;
+    min-width: 450px;
+  }
+}
+
+@media (max-width: 1024px) and (min-width: 769px) {
+  .content-wrapper {
+    gap: 24px;
+    padding: 40px 6rem;
+  }
+  
+  .left-panel, .right-panel {
+    padding: 24px;
+  }
+  
+  .right-panel {
+    flex: 3;
+  }
+  
+  .left-panel {
+    flex: 1;
+    min-width: 350px;
+  }
+}
+
+@media (max-width: 768px) {
+  .plagiarism-checker {
+    height: auto;
+    min-height: calc(100vh - 120px);
+  }
+  
+  .content-wrapper {
+    flex-direction: column;
+    gap: 16px;
+    padding: 16px 1.5rem;
+  }
+  
+  .left-panel, .right-panel {
+    padding: 16px;
+    flex: none;
+  }
+  
+  .right-panel {
+    flex: none;
+  }
+  
+  .submission-requirements {
+    padding: 16px;
+  }
+  
+  .requirements-list {
+    gap: 8px;
+  }
+  
+  .requirement-item {
+    font-size: 13px;
+    gap: 8px;
+  }
+  
+  .file-details {
+    flex-direction: column;
+    gap: 4px;
+  }
+  
+  /* 表格响应式 */
+  :deep(.el-table) {
+    font-size: 12px;
+  }
+  
+  :deep(.el-table th),
+  :deep(.el-table td) {
+    padding: 8px 4px;
+  }
+  
+  :deep(.el-table .cell) {
+    padding: 0 4px;
+  }
+}
+
+@media (max-width: 480px) {
+  .content-wrapper {
+    padding: 12px 1rem;
+    gap: 12px;
+  }
+  
+  .left-panel, .right-panel {
+    padding: 12px;
+  }
+  
+  .left-panel h2, .right-panel h2 {
+    font-size: 1.2rem;
+    margin-bottom: 16px;
+  }
+  
+  .submission-requirements {
+    padding: 12px;
+  }
+  
+  .submission-requirements h3 {
+    font-size: 14px;
+  }
+  
+  .requirement-item {
+    font-size: 12px;
+  }
+  
+  .file-info {
+    padding: 12px;
+  }
+  
+  .file-name {
+    font-size: 13px;
+  }
+  
+  .file-details {
+    font-size: 11px;
+  }
+  
+  /* 表格进一步优化 */
+  :deep(.el-table) {
+    font-size: 11px;
+  }
+  
+  :deep(.el-table th),
+  :deep(.el-table td) {
+    padding: 6px 2px;
+  }
+  
+  :deep(.el-table .cell) {
+    padding: 0 2px;
+  }
+  
+  /* 隐藏某些列在小屏幕上 */
+  :deep(.el-table .el-table__cell:nth-child(2)),
+  :deep(.el-table .el-table__cell:nth-child(6)) {
+    display: none;
+  }
 }
 </style> 

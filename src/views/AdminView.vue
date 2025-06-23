@@ -59,7 +59,7 @@ onMounted(() => {
 
 <style scoped>
 .admin-container {
-  max-width: 800px;
+  max-width: 100%;
   margin: 40px auto;
   padding: 30px;
   background: #fff;
@@ -85,5 +85,195 @@ h2 {
 
 :deep(.el-table th) {
   background-color: #f5f7fa;
+}
+
+/* 响应式设计 */
+@media (min-width: 1200px) {
+  .admin-container {
+    max-width: 100%;
+    margin: 60px auto;
+    padding: 50px;
+  }
+  
+  h2 {
+    font-size: 2rem;
+    margin-bottom: 40px;
+  }
+  
+  .form-row {
+    gap: 20px;
+    margin-bottom: 30px;
+  }
+  
+  :deep(.el-input) {
+    width: 300px !important;
+  }
+  
+  :deep(.el-button) {
+    font-size: 18px;
+    padding: 14px 28px;
+  }
+  
+  :deep(.el-table) {
+    font-size: 16px;
+  }
+  
+  :deep(.el-table th),
+  :deep(.el-table td) {
+    padding: 16px 12px;
+  }
+}
+
+@media (min-width: 1600px) {
+  .admin-container {
+    max-width: 100%;
+    margin: 80px auto;
+    padding: 60px;
+  }
+  
+  h2 {
+    font-size: 2.25rem;
+    margin-bottom: 50px;
+  }
+  
+  .form-row {
+    gap: 25px;
+    margin-bottom: 40px;
+  }
+  
+  :deep(.el-input) {
+    width: 350px !important;
+  }
+  
+  :deep(.el-button) {
+    font-size: 20px;
+    padding: 16px 32px;
+  }
+  
+  :deep(.el-table) {
+    font-size: 18px;
+  }
+  
+  :deep(.el-table th),
+  :deep(.el-table td) {
+    padding: 20px 16px;
+  }
+}
+
+@media (max-width: 1024px) and (min-width: 769px) {
+  .admin-container {
+    max-width: 100%;
+    margin: 50px auto;
+    padding: 40px;
+  }
+  
+  h2 {
+    font-size: 1.75rem;
+    margin-bottom: 35px;
+  }
+  
+  .form-row {
+    gap: 15px;
+    margin-bottom: 25px;
+  }
+  
+  :deep(.el-input) {
+    width: 250px !important;
+  }
+  
+  :deep(.el-button) {
+    font-size: 17px;
+    padding: 12px 24px;
+  }
+  
+  :deep(.el-table) {
+    font-size: 15px;
+  }
+  
+  :deep(.el-table th),
+  :deep(.el-table td) {
+    padding: 12px 8px;
+  }
+}
+
+@media (max-width: 768px) {
+  .admin-container {
+    margin: 20px auto;
+    padding: 20px;
+  }
+  
+  h2 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+  }
+  
+  .form-row {
+    flex-direction: column;
+    gap: 12px;
+    align-items: stretch;
+  }
+  
+  :deep(.el-input) {
+    width: 100% !important;
+    margin-right: 0 !important;
+  }
+  
+  :deep(.el-button) {
+    width: 100%;
+    font-size: 16px;
+    padding: 12px 20px;
+  }
+  
+  :deep(.el-table) {
+    font-size: 12px;
+  }
+  
+  :deep(.el-table th),
+  :deep(.el-table td) {
+    padding: 8px 4px;
+  }
+  
+  :deep(.el-table .cell) {
+    padding: 0 4px;
+  }
+}
+
+@media (max-width: 480px) {
+  .admin-container {
+    margin: 10px auto;
+    padding: 16px;
+  }
+  
+  h2 {
+    font-size: 1.3rem;
+    margin-bottom: 16px;
+  }
+  
+  .form-row {
+    gap: 8px;
+  }
+  
+  :deep(.el-button) {
+    font-size: 14px;
+    padding: 10px 16px;
+  }
+  
+  :deep(.el-table) {
+    font-size: 11px;
+  }
+  
+  :deep(.el-table th),
+  :deep(.el-table td) {
+    padding: 6px 2px;
+  }
+  
+  :deep(.el-table .cell) {
+    padding: 0 2px;
+  }
+  
+  /* 隐藏时间列在小屏幕上 */
+  :deep(.el-table .el-table__cell:nth-child(2)) {
+    display: none;
+  }
 }
 </style> 

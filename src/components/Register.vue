@@ -118,11 +118,12 @@ const handleSubmit = async () => {
   align-items: center;
   min-height: 100vh;
   background-color: #f5f7fa;
+  padding: 20px;
 }
 
 .register-card {
   width: 100%;
-  max-width: 400px;
+  max-width: 500px;
 }
 
 .login-link {
@@ -137,5 +138,143 @@ const handleSubmit = async () => {
 
 .login-link a:hover {
   text-decoration: underline;
+}
+
+/* 响应式设计 */
+@media (min-width: 1200px) {
+  .register-container {
+    padding: 30px;
+    min-height: calc(100vh - 120px);
+  }
+  
+  .register-card {
+    max-width: 600px;
+  }
+  
+  :deep(.el-form-item__label) {
+    font-size: 16px;
+  }
+  
+  :deep(.el-input__inner) {
+    font-size: 16px;
+    padding: 12px 16px;
+  }
+  
+  :deep(.el-button) {
+    font-size: 18px;
+    padding: 14px 24px;
+  }
+}
+
+@media (min-width: 1600px) {
+  .register-container {
+    padding: 40px;
+    min-height: calc(100vh - 160px);
+  }
+  
+  .register-card {
+    max-width: 700px;
+  }
+  
+  :deep(.el-form-item__label) {
+    font-size: 18px;
+  }
+  
+  :deep(.el-input__inner) {
+    font-size: 16px;
+    padding: 14px 18px;
+  }
+  
+  :deep(.el-button) {
+    font-size: 20px;
+    padding: 16px 28px;
+  }
+}
+
+@media (max-width: 1024px) and (min-width: 769px) {
+  .register-container {
+    padding: 25px;
+    min-height: calc(100vh - 100px);
+  }
+  
+  .register-card {
+    max-width: 450px;
+  }
+  
+  :deep(.el-form-item__label) {
+    font-size: 15px;
+  }
+  
+  :deep(.el-input__inner) {
+    font-size: 16px;
+    padding: 10px 14px;
+  }
+  
+  :deep(.el-button) {
+    font-size: 17px;
+    padding: 12px 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .register-container {
+    padding: 16px;
+    min-height: calc(100vh - 120px);
+  }
+  
+  .register-card {
+    max-width: 100%;
+  }
+  
+  :deep(.el-form-item__label) {
+    font-size: 14px;
+  }
+  
+  :deep(.el-input__inner) {
+    font-size: 16px; /* 防止iOS缩放 */
+  }
+  
+  :deep(.el-button) {
+    font-size: 16px;
+    padding: 12px 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .register-container {
+    padding: 12px;
+  }
+  
+  :deep(.el-card__header) {
+    padding: 16px;
+  }
+  
+  :deep(.el-card__body) {
+    padding: 16px;
+  }
+  
+  :deep(.el-form-item) {
+    margin-bottom: 16px;
+  }
+  
+  :deep(.el-form-item__label) {
+    font-size: 13px;
+    line-height: 1.4;
+  }
+  
+  :deep(.el-input__inner) {
+    font-size: 14px;
+    padding: 8px 12px;
+  }
+  
+  :deep(.el-button) {
+    font-size: 14px;
+    padding: 10px 16px;
+  }
+  
+  .login-link {
+    font-size: 13px;
+    margin-top: 12px;
+  }
 }
 </style> 
