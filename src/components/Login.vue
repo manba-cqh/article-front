@@ -33,7 +33,20 @@
       <div class="register-link">
         还没有账号？ <router-link to="/register">立即注册</router-link>
       </div>
+      <div class="blue-text">
+        忘记密码请联系客服
+      </div>
+      
     </form>
+    <div class="wechat-link">
+      <el-button type="success" plain @click="showQr = true">联系客服</el-button>
+    </div>
+    <el-dialog v-model="showQr" title="微信扫码关注" width="320px" :close-on-click-modal="true" center>
+      <div style="text-align:center;">
+        <img src="/wechat-qr.jpg" alt="微信二维码" style="width:220px;height:220px;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,0.08);" />
+        <div style="margin-top:12px;color:#666;font-size:14px;">识别二维码关注我们</div>
+      </div>
+    </el-dialog>
   </div>
 </template>
 
@@ -43,6 +56,7 @@ import { useRouter } from 'vue-router'
 import { authService } from '../services/auth'
 import eventBus from '../utils/eventBus'
 import { debugUtils } from '../utils/debug'
+import { ElDialog, ElButton } from 'element-plus'
 
 const router = useRouter()
 const loading = ref(false)
@@ -52,6 +66,8 @@ const formData = reactive({
   email: '',
   password: ''
 })
+
+const showQr = ref(false)
 
 const handleSubmit = async () => {
   try {
@@ -323,5 +339,16 @@ button:disabled {
   .register-link {
     font-size: 13px;
   }
+}
+
+.blue-text {
+  text-align: center;
+  margin-top: 18px;
+  color: #409EFF;
+}
+
+.wechat-link {
+  text-align: center;
+  margin-top: 18px;
 }
 </style> 

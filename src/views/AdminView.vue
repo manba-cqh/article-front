@@ -1,12 +1,12 @@
 <template>
   <div class="admin-container">
-    <h2>管理员序列号管理</h2>
+    <h2>管理员授权查询码管理</h2>
     <div class="form-row">
       <el-input v-model.number="count" type="number" min="1" placeholder="请输入生成数量" style="width: 200px; margin-right: 10px;" />
-      <el-button type="primary" @click="generateSerials" :loading="loading">生成序列号</el-button>
+      <el-button type="primary" @click="generateSerials" :loading="loading">生成授权查询码</el-button>
     </div>
     <el-table :data="serials" style="width: 100%; margin-top: 30px;">
-      <el-table-column prop="serial" label="序列号" />
+      <el-table-column prop="serial" label="授权查询码" />
       <el-table-column prop="created_at" label="生成时间">
         <template #default="scope">
           {{ new Date(scope.row.created_at).toLocaleString() }}
@@ -30,7 +30,7 @@ const fetchSerials = async () => {
     const response = await api.get('/serials')
     serials.value = response.data
   } catch (error) {
-    ElMessage.error('获取序列号列表失败：' + (error.response?.data?.detail || error.message))
+    ElMessage.error('获取授权查询码列表失败：' + (error.response?.data?.detail || error.message))
   }
 }
 
@@ -43,10 +43,10 @@ const generateSerials = async () => {
   loading.value = true
   try {
     const response = await api.post('/generate-serials', { count: count.value })
-    ElMessage.success('序列号生成成功')
+    ElMessage.success('授权查询码生成成功')
     await fetchSerials()
   } catch (error) {
-    ElMessage.error('生成序列号失败：' + (error.response?.data?.detail || error.message))
+    ElMessage.error('生成授权查询码失败：' + (error.response?.data?.detail || error.message))
   } finally {
     loading.value = false
   }

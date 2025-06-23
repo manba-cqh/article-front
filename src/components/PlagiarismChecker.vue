@@ -78,9 +78,9 @@
             </el-button>
           </el-form-item>
         </el-form>
-        <!-- 序列号输入弹窗 -->
-        <el-dialog v-model="serialDialogVisible" title="请输入序列号" width="400px" :close-on-click-modal="false">
-          <el-input v-model="serialInput" placeholder="请输入序列号" />
+        <!-- 授权查询码输入弹窗 -->
+        <el-dialog v-model="serialDialogVisible" title="请输入授权查询码" width="400px" :close-on-click-modal="false">
+          <el-input v-model="serialInput" placeholder="请输入授权查询码" />
           <template #footer>
             <el-button @click="serialDialogVisible = false">取消</el-button>
             <el-button type="primary" :loading="serialChecking" @click="handleSerialCheck">确定</el-button>
@@ -163,7 +163,7 @@ const selectedFile = ref(null)
 const report = ref(null)
 const form = reactive({})
 
-// 序列号弹窗相关
+// 授权查询码弹窗相关
 const serialDialogVisible = ref(false)
 const serialInput = ref('')
 const serialChecking = ref(false)
@@ -181,17 +181,17 @@ const openSerialDialog = () => {
 
 const handleSerialCheck = async () => {
   if (!serialInput.value) {
-    ElMessage.warning('请输入序列号')
+    ElMessage.warning('请输入授权查询码')
     return
   }
   serialChecking.value = true
   try {
-    // 校验序列号
+    // 校验授权查询码
     await api.post('/validate-serial', { serial: serialInput.value })
     serialDialogVisible.value = false
     handleCheckWithSerial(serialInput.value)
   } catch (error) {
-    ElMessage.error(error.response?.data?.detail || '序列号校验失败')
+    ElMessage.error(error.response?.data?.detail || '授权查询码校验失败')
   } finally {
     serialChecking.value = false
   }
