@@ -334,7 +334,7 @@ onUnmounted(() => {
   height: calc(100vh - 64px);
   box-sizing: border-box;
   background: #EAF1F3;
-  padding: 0;
+  padding: 0 0 20px 0;
 }
 .content-wrapper {
   display: flex;
@@ -532,9 +532,10 @@ onUnmounted(() => {
 
 @media (max-width: 768px) {
   .plagiarism-checker {
-    height: auto;
-    min-height: calc(100vh - 120px);
-  }
+  height: auto;
+  min-height: calc(100vh - 120px);
+  padding-bottom: 20px;
+}
   
   .content-wrapper {
     flex-direction: column;
