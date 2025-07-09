@@ -2,14 +2,14 @@ import axios from 'axios'
 import { authService } from './auth'
 import config from '../config.js'
 
-const API_KEY = 'QAJhXdh1AhdA7lbQhp79dnYh35pMsw8542'
+const API_KEY = 'n8bsu9324zeuAbbe2X5tn82O3wh4g6vwOs'
 const BASE_URL = config.API_BASE_URL
 
 export const plagwiseService = {
   // 上传文档进行查重
   async checkPlagiarism(file, options = {}) {
     const formData = new FormData()
-    formData.append('email', '753818188@qq.com')
+    formData.append('email', 'delightyeol@gmail.com')
     formData.append('api_key', API_KEY)
     formData.append('environment', 'production')
     formData.append('submission_type', 'file')
